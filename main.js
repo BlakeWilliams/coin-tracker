@@ -1,13 +1,16 @@
 import electron, { app, BrowserWindow, nativeImage, Tray } from 'electron'
+import { enableLiveReload } from 'electron-compile';
 import path from 'path';
 import url from 'url'
+
+enableLiveReload();
 
 let mainWindow;
 let tray;
 
 function createWindow () {
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 400,
     height: 600,
     show: false,
     frame: false,
@@ -22,7 +25,7 @@ function createWindow () {
     slashes: true
   }))
 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -75,11 +78,5 @@ function createTray () {
   const image = nativeImage.createFromPath(path.join(__dirname, '/images/trayTemplate.png'))
   tray = new Tray(image)
 
-  tray.on('click', event => {
-    toggleWindow()
-
-    if (mainWindow.isVisible() && process.defaultApp && event.metaKey) {
-      mainWindow.openDevTools({mode: 'detach'})
-    }
-  })
+  tray.on('click', toggleWindow);
 }

@@ -18,6 +18,13 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.7.8",
-    "electron-prebuilt-compile": "^1.8.2-beta.3"
+    "electron-prebuilt-compile": "^1.8.2-beta.3",
+    "lodash": "^4.17.4"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "format-currency": "^1.0.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
