@@ -6,6 +6,7 @@ import url from 'url'
 import TrayWindowManager from './trayWindowManager';
 
 enableLiveReload();
+app.dock.hide();
 
 let mainWindow;
 let tray;
@@ -26,8 +27,6 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-
-  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function () {
     mainWindow = null
