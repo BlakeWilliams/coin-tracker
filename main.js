@@ -33,6 +33,11 @@ function createWindow () {
   })
 }
 
+function createTray () {
+  const image = nativeImage.createFromPath(path.join(__dirname, '/images/trayTemplate.png'))
+  tray = new Tray(image)
+}
+
 app.on('ready', function() {
   createWindow();
   createTray();
@@ -51,8 +56,3 @@ app.on('activate', function () {
     createWindow()
   }
 })
-
-function createTray () {
-  const image = nativeImage.createFromPath(path.join(__dirname, '/images/trayTemplate.png'))
-  tray = new Tray(image)
-}
