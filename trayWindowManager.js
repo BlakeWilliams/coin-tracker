@@ -1,3 +1,7 @@
+import { screen as desktopScreen } from 'electron';
+
+const HALF_TRAY_WIDTH = 11;
+
 class TrayWindowManager {
   constructor(tray, window) {
     this.tray = tray;
@@ -39,10 +43,21 @@ class TrayWindowManager {
     const windowBounds = this.window.getBounds()
     const trayBounds = this.tray.getBounds()
 
-    const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
+    const x = this._getXForWindow(windowBounds, trayBounds);
     const y = Math.round(trayBounds.y + trayBounds.height)
 
     return { x, y };
+  }
+
+  _getXForWindow(windowBounds, trayBounds) {
+    const { width: screenWidth } = desktopScreen.getPrimaryDisplay().bounds;
+    const rightWhenPositionedLeft = trayBounds.x + windowBounds.width;
+
+    if (rightWhenPositionedLeft > screenWidth) {
+      return trayBounds.x - windowBounds.width + trayBounds.width + HALF_TRAY_WIDTH;
+    } else {
+      return trayBounds.x - HALF_TRAY_WIDTH;
+    }
   }
 }
 
