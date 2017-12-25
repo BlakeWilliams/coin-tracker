@@ -3,6 +3,8 @@ import { enableLiveReload } from 'electron-compile';
 import path from 'path';
 import url from 'url'
 
+import TrayWindowManager from './trayWindowManager';
+
 enableLiveReload();
 
 let mainWindow;
@@ -35,6 +37,8 @@ function createWindow () {
 app.on('ready', function() {
   createWindow();
   createTray();
+
+  const trayManager = new TrayWindowManager(tray, mainWindow);
 })
 
 app.on('window-all-closed', function () {
@@ -49,34 +53,7 @@ app.on('activate', function () {
   }
 })
 
-function getIconCenter() {
-  const windowBounds = mainWindow.getBounds()
-  const trayBounds = tray.getBounds()
-
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
-  const y = Math.round(trayBounds.y + trayBounds.height)
-
-  return { x, y };
-}
-
-function showWindow() {
-  const position = getIconCenter()
-  mainWindow.setPosition(position.x, position.y, false)
-  mainWindow.show()
-  mainWindow.focus()
-}
-
-function toggleWindow() {
-  if (mainWindow.isVisible()) {
-    mainWindow.hide();
-  } else {
-    showWindow();
-  }
-}
-
 function createTray () {
   const image = nativeImage.createFromPath(path.join(__dirname, '/images/trayTemplate.png'))
   tray = new Tray(image)
-
-  tray.on('click', toggleWindow);
 }
