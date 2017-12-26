@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Coin from './coin';
 import fetchCoinMarketCap from './fetchCoinMarketCap';
 
-const TRACKED = ['BTC', 'BCH', 'ETH', 'LTC', 'MIOTA', 'OMG', 'FUN'];
+const TRACKED = ['BTC', 'BCH', 'ETH', 'LTC', 'MIOTA', 'TRX', 'OMG', 'FUN'];
 const REFRESH_INTERVAL = 45000;
 
 class App extends React.Component {
