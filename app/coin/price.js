@@ -7,13 +7,13 @@ class Price extends React.Component {
     const { value, twentyFourHourChange } = this.props;
 
     return (
-      <p className="price">
+      <div className="price">
         ${formatCurrency(value)}
 
         <div className={classNames("relative", { negative: twentyFourHourChange < 0 })}>
           {twentyFourHourChange}%
         </div>
-      </p>
+      </div>
     )
   }
 }
