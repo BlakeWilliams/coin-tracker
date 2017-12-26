@@ -6,14 +6,17 @@ class TrayWindowManager {
   constructor(tray, window) {
     this.tray = tray;
     this.window = window;
-    this.visible = false;
 
     tray.on("click", () => this.toggle());
+    tray.on("double-click", () => this.toggle());
+
     window.on("blur", () => this.hide());
+    window.on("show", () => tray.setHighlightMode("always"));
+    window.on("hide", () => tray.setHighlightMode("never"));
   }
 
   toggle() {
-    if (this.visible) {
+    if (this.window.isVisible()) {
       this.hide();
     } else {
       this.show();
@@ -22,21 +25,16 @@ class TrayWindowManager {
 
   show() {
     this._showWindow();
-    this.tray.setHighlightMode("always");
-    this.visible = true;
   }
 
   hide() {
     this.window.hide();
-    this.tray.setHighlightMode("never");
-    this.visible = false;
   }
 
   _showWindow() {
     const position = this._getIconCenter();
     this.window.setPosition(position.x, position.y, false);
     this.window.show();
-    this.window.focus();
   }
 
   _getIconCenter() {
