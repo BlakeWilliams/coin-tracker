@@ -20,6 +20,11 @@ body {
   padding: 10px 12px;
   border-bottom: 1px solid $border-color;
 
+  &:hover {
+    background-color: #d9d9d9;
+    cursor: pointer;
+  }
+
   &:last-child {
     border-bottom: 0;
   }
