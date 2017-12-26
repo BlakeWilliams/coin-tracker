@@ -10,4 +10,4 @@ Track :money_with_wings: in your menu bar.
 
 ## Screenshots
 
-![coin-tracker screenshot](https://user-images.githubusercontent.com/342554/34344282-4bb72598-e9b2-11e7-97a1-81276c51440c.png)
+![coin-tracker screenshot](https://user-images.githubusercontent.com/342554/34344394-7e18e318-e9b3-11e7-89f4-9de5a2bbfbd1.png)
