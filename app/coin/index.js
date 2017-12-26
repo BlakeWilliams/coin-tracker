@@ -1,8 +1,8 @@
-import React from 'react';
-import Price from './price';
-import { shell } from 'electron';
+import React from "react";
+import Price from "./price";
+import { shell } from "electron";
 
-const COIN_URL_BASE = 'https://coinmarketcap.com/currencies';
+const COIN_URL_BASE = "https://coinmarketcap.com/currencies";
 
 class Coin extends React.Component {
   openUrl() {

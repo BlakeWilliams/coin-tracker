@@ -1,4 +1,4 @@
-import { screen as desktopScreen } from 'electron';
+import { screen as desktopScreen } from "electron";
 
 const BODY_MARGIN = 10;
 
@@ -8,8 +8,8 @@ class TrayWindowManager {
     this.window = window;
     this.visible = false;
 
-    tray.on('click', () => this.toggle());
-    window.on('blur', () => this.hide());
+    tray.on("click", () => this.toggle());
+    window.on("blur", () => this.hide());
   }
 
   toggle() {
@@ -22,29 +22,29 @@ class TrayWindowManager {
 
   show() {
     this._showWindow();
-    this.tray.setHighlightMode('always')
+    this.tray.setHighlightMode("always");
     this.visible = true;
   }
 
   hide() {
     this.window.hide();
-    this.tray.setHighlightMode('never')
+    this.tray.setHighlightMode("never");
     this.visible = false;
   }
 
   _showWindow() {
-    const position = this._getIconCenter()
-    this.window.setPosition(position.x, position.y, false)
-    this.window.show()
-    this.window.focus()
+    const position = this._getIconCenter();
+    this.window.setPosition(position.x, position.y, false);
+    this.window.show();
+    this.window.focus();
   }
 
   _getIconCenter() {
-    const windowBounds = this.window.getBounds()
-    const trayBounds = this.tray.getBounds()
+    const windowBounds = this.window.getBounds();
+    const trayBounds = this.tray.getBounds();
 
     const x = this._getXForWindow(windowBounds, trayBounds);
-    const y = Math.round(trayBounds.y + trayBounds.height)
+    const y = Math.round(trayBounds.y + trayBounds.height);
 
     return { x, y };
   }

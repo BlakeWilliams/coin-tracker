@@ -4,16 +4,14 @@
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
+  "keywords": ["Electron", "quick", "start", "tutorial", "demo"],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
@@ -24,6 +22,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "format-currency": "^1.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
