@@ -1,6 +1,6 @@
 import { screen as desktopScreen } from 'electron';
 
-const HALF_TRAY_WIDTH = 11;
+const BODY_MARGIN = 10;
 
 class TrayWindowManager {
   constructor(tray, window) {
@@ -54,9 +54,9 @@ class TrayWindowManager {
     const rightWhenPositionedLeft = trayBounds.x + windowBounds.width;
 
     if (rightWhenPositionedLeft > screenWidth) {
-      return trayBounds.x - windowBounds.width + trayBounds.width + HALF_TRAY_WIDTH;
+      return trayBounds.x - windowBounds.width + trayBounds.width + BODY_MARGIN;
     } else {
-      return trayBounds.x - HALF_TRAY_WIDTH;
+      return trayBounds.x - BODY_MARGIN;
     }
   }
 }
