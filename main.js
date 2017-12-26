@@ -1,7 +1,10 @@
-import electron, { app, BrowserWindow, nativeImage, Tray } from "electron";
+import { app, BrowserWindow, nativeImage, ipcMain, Tray } from "electron";
+import Store from "electron-store";
 import { enableLiveReload } from "electron-compile";
 import path from "path";
 import url from "url";
+
+const store = new Store();
 
 import TrayWindowManager from "./trayWindowManager";
 
@@ -9,12 +12,12 @@ enableLiveReload();
 app.dock.hide();
 
 let mainWindow;
+let settingsWindow;
 let tray;
 
-function createWindow() {
+function createWindows() {
   mainWindow = new BrowserWindow({
     width: 300,
-    height: 600,
     show: false,
     frame: false,
     fullscreenable: false,
@@ -22,6 +25,8 @@ function createWindow() {
     transparent: true,
     useContentSize: true,
   });
+
+  // mainWindow.webContents.openDevTools();
 
   mainWindow.loadURL(
     url.format({
@@ -44,7 +49,7 @@ function createTray() {
 }
 
 app.on("ready", function() {
-  createWindow();
+  createWindows();
   createTray();
 
   const trayManager = new TrayWindowManager(tray, mainWindow);
@@ -60,4 +65,82 @@ app.on("activate", function() {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on("openSettings", function() {
+  if (settingsWindow) {
+    settingsWindow.show();
+    return;
+  }
+
+  settingsWindow = new BrowserWindow({
+    width: 600,
+    height: 600,
+    fullscreenable: false,
+    resizable: false,
+  });
+
+  // settingsWindow.webContents.openDevTools();
+
+  settingsWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "./app/settings/index.html"),
+      protocol: "file:",
+      slashes: true,
+    }),
+  );
+
+  settingsWindow.on("close", function() {
+    app.dock.hide();
+    settingsWindow = null;
+  });
+
+  app.dock.show();
+});
+
+const savedCoins = store.get("savedCoins") || {
+  BTC: {
+    enabled: true,
+    total: 0,
+  },
+  ETH: {
+    enabled: true,
+    total: 0,
+  },
+  BCH: {
+    enabled: false,
+    total: 0,
+  },
+};
+
+ipcMain.on("getSavedCoins", function(event) {
+  event.sender.send("coinsUpdated", savedCoins);
+});
+
+ipcMain.on("toggleCoin", function(event, name) {
+  const coin = savedCoins[name];
+
+  if (coin) {
+    coin.enabled = !coin.enabled;
+  } else {
+    savedCoins[name] = { enabled: true, total: 0 };
+  }
+
+  store.set("savedCoins", savedCoins);
+  mainWindow.webContents.send("coinsUpdated", savedCoins);
+  event.sender.send("coinsUpdated", savedCoins);
+});
+
+ipcMain.on("updateTotal", function(event, name, total) {
+  const coin = savedCoins[name];
+
+  if (coin) {
+    coin.total = total;
+  } else {
+    savedCoins[name] = { enabled: false, total };
+  }
+
+  store.set("savedCoins", savedCoins);
+  mainWindow.webContents.send("coinsUpdated", savedCoins);
+  event.sender.send("coinsUpdated", savedCoins);
 });

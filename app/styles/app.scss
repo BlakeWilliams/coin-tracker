@@ -1,4 +1,6 @@
+// @import "node_modules/font-awesome/scss/font-awesome";
 @import "app/styles/reset";
+
 $border-color: #d6d6d6;
 
 body {
@@ -25,7 +27,7 @@ body {
     cursor: pointer;
   }
 
-  &:last-child {
+  &:last-of-type {
     border-bottom: 0;
   }
 
@@ -62,6 +64,25 @@ body {
 
     &.negative {
       color: red;
+    }
+  }
+}
+
+.status {
+  background-color: #434344;
+  color: #f1f1f1;
+  padding: 16px 12px;
+  display: flex;
+
+  .total {
+    flex: 1;
+  }
+
+  i {
+    color: #9a9a9a;
+
+    &:hover {
+      color: #eee;
     }
   }
 }

@@ -1,0 +1,70 @@
+@import "app/styles/reset";
+@import "app/styles/switch";
+$border-color: #ececec;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    background-color: #fbfbfb;
+  font-family: "Helvetica Neue", Helvetica, arial, sans-serif;
+  margin: 0;
+}
+
+.coin-container {
+  .filter {
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-bottom: 1px solid $border-color;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.coin {
+  align-items: center;
+  display: flex;
+  padding: 14px 12px;
+  border-bottom: 1px solid $border-color;
+  justify-content: center;
+  align-items: center;
+
+  &:nth-child(even) {
+    background-color: #fbfbfb;
+  }
+
+  .left {
+    display: flex;
+    flex: 1;
+    align-items: center;
+
+  }
+
+  .total {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px dotted #aaa;
+    color: #676767;
+    font-size: 16px;
+    margin-right: 12px;
+    text-align: right;
+    width: 61px;
+  }
+
+  .symbol {
+    color: #999;
+    margin-left: 4px;
+  }
+
+  .icon {
+    max-width: 22px;
+    max-height: 22px;
+    margin-right: 12px;
+  }
+}

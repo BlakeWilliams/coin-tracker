@@ -1,18 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ipcRenderer } from "electron";
 import _ from "lodash";
 
 import Coin from "./coin";
+import Stats from "./stats";
 import fetchCoinMarketCap from "./fetchCoinMarketCap";
 
-const TRACKED = ["BTC", "BCH", "ETH", "LTC", "MIOTA", "TRX", "OMG", "FUN"];
 const REFRESH_INTERVAL = 45000;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { coinData: null };
+    this.state = { savedCoins: null, coinData: null };
   }
 
   updateCoins() {
@@ -27,19 +28,26 @@ class App extends React.Component {
     this.interval = setInterval(() => {
       this.updateCoins();
     }, REFRESH_INTERVAL);
+
+    ipcRenderer.on("coinsUpdated", (_event, savedCoins) => {
+      this.setState({ savedCoins });
+    });
+    ipcRenderer.send("getSavedCoins");
   }
 
   render() {
-    const { coinData } = this.state;
+    const { savedCoins, coinData } = this.state;
 
-    if (!coinData) {
+    if (!coinData || !savedCoins) {
       return <h1>Loading...</h1>;
     } else {
-      const tracking = _.values(_.pick(coinData, TRACKED));
+      const tracked = _.keys(_.pickBy(savedCoins, "enabled"));
+      const tracking = _.values(_.pick(coinData, tracked));
 
       return (
         <div className="coin-container">
           {tracking.map(coin => <Coin key={coin.id} data={coin} />)}
+          <Stats coinData={coinData} savedCoins={savedCoins} />
         </div>
       );
     }
