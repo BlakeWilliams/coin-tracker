@@ -22,6 +22,9 @@ function createWindow () {
     transparent: true,
   })
 
+
+  mainWindow.webContents.openDevTools()
+
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, './app/index.html'),
     protocol: 'file:',

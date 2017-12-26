@@ -4,9 +4,12 @@ import Price from './price';
 class Coin extends React.Component {
   render() {
     const { data } = this.props;
+    const symbol = data.symbol.toLowerCase();
+    // const image = require(`../cryptocurrency-icons/icons/${symbol}.svg`)
 
     return (
       <div className="coin-container__coin">
+        <img src={`cryptocurrency-icons/svg/color/${symbol}.svg`} style={imageStyle}/>
         <p className="name">{data.name}</p>
 
         <div className="priceData">
@@ -19,6 +22,12 @@ class Coin extends React.Component {
       </div>
     );
   }
+}
+
+const imageStyle = {
+  maxWidth: "22px",
+  maxHeight: "22px",
+  marginRight: "7px",
 }
 
 export default Coin;
