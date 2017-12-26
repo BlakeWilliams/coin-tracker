@@ -20,6 +20,7 @@ function createWindow () {
     fullscreenable: false,
     resizable: false,
     transparent: true,
+    useContentSize: true,
   })
 
   mainWindow.loadURL(url.format({
