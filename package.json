@@ -44,7 +44,10 @@
   },
   "build": {
     "appId": "me.blakewilliams.coin-tracker",
-    "publish": ["github"],
+    "publish": {
+      "provider": ["github"],
+      "owner": "BlakeWilliams"
+    },
     "mac": {
       "icon": "app/images/mac.icns",
       "target": "zip"
