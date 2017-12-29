@@ -9,7 +9,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "precommit": "lint-staged",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "release": "electron-forge publish --target github"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
