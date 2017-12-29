@@ -1,16 +1,16 @@
-import { app, BrowserWindow, nativeImage, ipcMain, Tray } from "electron";
-import Store from "electron-store";
-import { enableLiveReload } from "electron-compile";
 import path from "path";
 import url from "url";
-
-const store = new Store();
+import { app, BrowserWindow, nativeImage, ipcMain, Tray } from "electron";
+import { enableLiveReload } from "electron-compile";
+import Store from "electron-store";
+import isDev from "electron-is-dev";
 
 import TrayWindowManager from "./lib/trayWindowManager";
 
-enableLiveReload();
 app.dock.hide();
+enableLiveReload();
 
+const store = new Store();
 let mainWindow;
 let settingsWindow;
 let tray;
@@ -26,7 +26,9 @@ function createWindows() {
     useContentSize: true,
   });
 
-  // mainWindow.webContents.openDevTools();
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.loadURL(
     url.format({
@@ -80,7 +82,9 @@ ipcMain.on("openSettings", function() {
     resizable: false,
   });
 
-  // settingsWindow.webContents.openDevTools();
+  if (isDev) {
+    settingsWindow.webContents.openDevTools();
+  }
 
   settingsWindow.loadURL(
     url.format({
