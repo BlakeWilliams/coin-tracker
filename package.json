@@ -4,10 +4,12 @@
   "description": "Track virtual dollars for virtual profit",
   "author": "Blake Williams",
   "license": "MIT",
-  "main": "main.js",
+  "main": "app/main.js",
   "scripts": {
-    "start": "electron .",
-    "precommit": "lint-staged"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "precommit": "lint-staged",
+    "make": "electron-forge make"
   },
   "lint-staged": {
     "*.{js,json,css,md}": ["prettier --write", "git add"]
@@ -15,13 +17,14 @@
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-latest": "^6.24.1",
-    "electron": "~1.7.8",
-    "electron-prebuilt-compile": "^1.8.2-beta.3",
+    "electron-prebuilt-compile": "1.8.2-beta.3",
     "lodash": "^4.17.4"
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "electron-compile": "^6.4.2",
     "electron-redux": "^1.3.1",
+    "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^1.3.0",
     "font-awesome": "^4.7.0",
     "format-currency": "^1.0.0",
@@ -33,5 +36,23 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "darwin": ["dmg"]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn",
+        "icon": "app/images/mac.icns"
+      },
+      "electronInstallerDMG": {
+        "icon": "app/images/mac.icns"
+      },
+      "github_repository": {
+        "owner": "BlakeWilliams",
+        "name": "coin-tracker"
+      }
+    }
   }
 }

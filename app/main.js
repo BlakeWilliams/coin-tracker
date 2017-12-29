@@ -6,7 +6,7 @@ import url from "url";
 
 const store = new Store();
 
-import TrayWindowManager from "./trayWindowManager";
+import TrayWindowManager from "./lib/trayWindowManager";
 
 enableLiveReload();
 app.dock.hide();
@@ -30,7 +30,7 @@ function createWindows() {
 
   mainWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, "./app/index.html"),
+      pathname: path.join(__dirname, "./menu.html"),
       protocol: "file:",
       slashes: true,
     }),
@@ -80,11 +80,11 @@ ipcMain.on("openSettings", function() {
     resizable: false,
   });
 
-  // settingsWindow.webContents.openDevTools();
+  settingsWindow.webContents.openDevTools();
 
   settingsWindow.loadURL(
     url.format({
-      pathname: path.join(__dirname, "./app/settings/index.html"),
+      pathname: path.join(__dirname, "./settings.html"),
       protocol: "file:",
       slashes: true,
     }),

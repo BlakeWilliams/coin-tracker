@@ -1,5 +1,11 @@
 import React from "react";
 import { ipcRenderer } from "electron";
+import path from "path";
+
+const baseIconPath = path.join(
+  __dirname,
+  "../../cryptocurrency-icons/svg/color",
+);
 
 class Coin extends React.Component {
   get isChecked() {
@@ -16,6 +22,13 @@ class Coin extends React.Component {
     } else {
       return 0;
     }
+  }
+
+  get iconPath() {
+    const { coin } = this.props;
+    const iconPath = coin.symbol.toLowerCase();
+
+    return `${baseIconPath}/${iconPath}.svg`;
   }
 
   updateValue(e) {
@@ -35,10 +48,7 @@ class Coin extends React.Component {
     return (
       <div className="coin">
         <div className="left">
-          <img
-            className="icon"
-            src={`../cryptocurrency-icons/svg/color/${coin.symbol}.svg`}
-          />
+          <img className="icon" src={this.iconPath} />
           <span className="name">{coin.name}</span>{" "}
           <span className="symbol">({coin.symbol})</span>
         </div>
