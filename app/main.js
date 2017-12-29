@@ -2,6 +2,7 @@ import path from "path";
 import url from "url";
 import { app, BrowserWindow, nativeImage, ipcMain, Tray } from "electron";
 import { enableLiveReload } from "electron-compile";
+import { autoUpdater } from "electron-updater";
 import Store from "electron-store";
 import isDev from "electron-is-dev";
 
@@ -53,6 +54,7 @@ function createTray() {
 app.on("ready", function() {
   createWindows();
   createTray();
+  autoUpdater.checkForUpdatesAndNotify();
 
   const trayManager = new TrayWindowManager(tray, mainWindow);
 });
