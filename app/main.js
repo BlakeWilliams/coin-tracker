@@ -80,7 +80,7 @@ ipcMain.on("openSettings", function() {
     resizable: false,
   });
 
-  settingsWindow.webContents.openDevTools();
+  // settingsWindow.webContents.openDevTools();
 
   settingsWindow.loadURL(
     url.format({
