@@ -44,6 +44,7 @@
   },
   "build": {
     "appId": "me.blakewilliams.coin-tracker",
+    "productName": "Coin Tracker",
     "mac": {
       "icon": "app/images/mac.icns",
       "target": "zip",
