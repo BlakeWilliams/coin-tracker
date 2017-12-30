@@ -1,6 +1,6 @@
 {
   "name": "coin-tracker",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Track virtual dollars for virtual profit",
   "author": "Blake Williams",
   "license": "MIT",
@@ -44,13 +44,13 @@
   },
   "build": {
     "appId": "me.blakewilliams.coin-tracker",
-    "publish": {
-      "provider": ["github"],
-      "owner": "BlakeWilliams"
-    },
     "mac": {
       "icon": "app/images/mac.icns",
-      "target": "zip"
+      "target": "zip",
+      "publish": {
+        "provider": "github",
+        "owner": "BlakeWilliams"
+      }
     }
   }
 }
