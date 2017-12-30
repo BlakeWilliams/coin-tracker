@@ -1,9 +1,18 @@
-import React from "react";
+import * as React from "react";
+import * as _ from "lodash";
 import { ipcRenderer } from "electron";
 import formatCurrency from "format-currency";
-import _ from "lodash";
 
-class Stats extends React.Component {
+interface StatsInterface {
+  readonly total: number,
+}
+
+interface Props {
+  coinData: object,
+  savedCoins: object,
+}
+
+class Stats extends React.Component<Props, null> implements StatsInterface {
   openSettings() {
     ipcRenderer.send("openSettings");
   }

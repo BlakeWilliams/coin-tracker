@@ -1,10 +1,16 @@
-import React from "react";
-import Price from "./price";
+import * as React from "react";
 import { shell } from "electron";
+
+import { CoinMarketcapCoin } from '../fetchCoinMarketCap';
+import Price from "./price";
 
 const COIN_URL_BASE = "https://coinmarketcap.com/currencies";
 
-class Coin extends React.Component {
+interface Props {
+  data?: CoinMarketcapCoin,
+}
+
+class Coin extends React.Component<Props, null> {
   openUrl() {
     const { data } = this.props;
     shell.openExternal(`${COIN_URL_BASE}/${data.id}`);

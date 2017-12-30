@@ -1,24 +1,28 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as _ from "lodash";
 import { ipcRenderer } from "electron";
-import _ from "lodash";
 
 import Coin from "./coin";
 import Stats from "./stats";
 import fetchCoinMarketCap from "./fetchCoinMarketCap";
+import { CoinMarketcapCoin } from "./fetchCoinMarketCap";
 
 const REFRESH_INTERVAL = 45000;
 
 interface State {
   savedCoins?: object,
-  coinData?: object
+  coinData?: CoinMarketcapCoin[] 
 }
 
-interface AppInterface {
-  interval?: number,
-}
+class App extends React.Component<any, State> {
+  state: {
+    savedCoins: null,
+    coinData: null
+  }
 
-class App<AppInterface> extends React.Component<State, any> {
+  interval?: NodeJS.Timer
+
   constructor(props) {
     super(props);
 
@@ -34,7 +38,7 @@ class App<AppInterface> extends React.Component<State, any> {
   componentDidMount() {
     this.updateCoins();
 
-    this.interval = setInterval(() => {
+    this.interval = global.setInterval(() => {
       this.updateCoins();
     }, REFRESH_INTERVAL);
 
@@ -51,7 +55,9 @@ class App<AppInterface> extends React.Component<State, any> {
       return <h1>Loading...</h1>;
     } else {
       const tracked = _.keys(_.pickBy(savedCoins, "enabled"));
-      const tracking = _.values(_.pick(coinData, tracked));
+      const tracking:Array<CoinMarketcapCoin> = coinData!.filter(coin => {
+        return _.includes(tracked, coin.symbol);
+      })
 
       return (
         <div className="coin-container">

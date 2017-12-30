@@ -1,8 +1,14 @@
-import React from "react";
+import * as React from "react";
 import formatCurrency from "format-currency";
 import classNames from "classnames";
 
-class Price extends React.Component {
+interface Props {
+  value: string,
+  twentyFourHourChange: string,
+  sevenDayChange: string,
+}
+
+class Price extends React.Component<Props, null> {
   render() {
     const { value, twentyFourHourChange } = this.props;
 
@@ -11,7 +17,7 @@ class Price extends React.Component {
         ${formatCurrency(value)}
         <div
           className={classNames("relative", {
-            negative: twentyFourHourChange < 0,
+            negative: parseFloat(twentyFourHourChange) < 0,
           })}
         >
           {twentyFourHourChange}%

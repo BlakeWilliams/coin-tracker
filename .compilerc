@@ -10,6 +10,19 @@
     "sourceMaps": "inline"
   },
   "text/typescript": {
-    "jsx": "React"
+    "babel": {
+      "presets": [
+        "latest",
+        "react"
+      ],
+      "sourceMaps": "both"
+    },
+    "lib": [
+      "dom",
+      "es7"
+    ],
+    "jsx": "react",
+    "module": "es6",
+    "sourceMap": true
   }
 }
