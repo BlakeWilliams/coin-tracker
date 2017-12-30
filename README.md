@@ -22,4 +22,6 @@ is not pushed to Github.
 
 ## Screenshots
 
-![coin-tracker screenshot](https://user-images.githubusercontent.com/342554/34344394-7e18e318-e9b3-11e7-89f4-9de5a2bbfbd1.png)
+![coin-tracker screenshot](https://user-images.githubusercontent.com/342554/34457528-3a91b378-ed81-11e7-975d-d10332ad573b.png)
+
+![coin-tracker settings screenshot](https://user-images.githubusercontent.com/342554/34457535-65d18a40-ed81-11e7-9f9b-b958d7a55b89.png)
