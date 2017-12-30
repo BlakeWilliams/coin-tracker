@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { ipcRenderer } from "electron";
 import _ from "lodash";
 
@@ -9,7 +9,16 @@ import fetchCoinMarketCap from "./fetchCoinMarketCap";
 
 const REFRESH_INTERVAL = 45000;
 
-class App extends React.Component {
+interface State {
+  savedCoins?: object,
+  coinData?: object
+}
+
+interface AppInterface {
+  interval?: number,
+}
+
+class App<AppInterface> extends React.Component<State, any> {
   constructor(props) {
     super(props);
 

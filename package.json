@@ -17,6 +17,9 @@
     "*.{js,json,css,md}": ["prettier --write", "git add"]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.0.0-beta.36",
+    "@types/react": "^16.0.31",
+    "@types/react-dom": "^16.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-latest": "^6.24.1",
     "electron-builder": "^19.49.4",
@@ -38,6 +41,7 @@
     "prettier": "^1.9.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0-beta.9",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"

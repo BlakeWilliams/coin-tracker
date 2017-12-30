@@ -8,5 +8,8 @@
       "transform-object-rest-spread"
     ],
     "sourceMaps": "inline"
+  },
+  "text/typescript": {
+    "jsx": "React"
   }
 }
