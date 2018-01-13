@@ -1,3 +1,6 @@
 [submodule "app/cryptocurrency-icons"]
-	path = app/cryptocurrency-icons
+	path = src/static/cryptocurrency-icons
+	url = git@github.com:cjdowner/cryptocurrency-icons.git
+[submodule "src/static/cryptocurrency-icons"]
+	path = src/static/cryptocurrency-icons
 	url = git@github.com:cjdowner/cryptocurrency-icons.git

@@ -1,7 +1,6 @@
 import path from "path";
 import url from "url";
 import { app, BrowserWindow, nativeImage, ipcMain, Tray } from "electron";
-import { enableLiveReload } from "electron-compile";
 import { autoUpdater } from "electron-updater";
 import Store from "electron-store";
 import isDev from "electron-is-dev";
@@ -9,12 +8,23 @@ import isDev from "electron-is-dev";
 import TrayWindowManager from "./lib/trayWindowManager";
 
 app.dock.hide();
-enableLiveReload();
 
 const store = new Store();
 let mainWindow;
 let settingsWindow;
 let tray;
+
+function getHtmlPath(name) {
+  if (isDev) {
+    return `http://localhost:8080/${name}`;
+  } else {
+    return url.format({
+      pathname: path.join(__dirname, `../renderer/${name}`),
+      protocol: "file:",
+      slashes: true,
+    });
+  }
+}
 
 function createWindows() {
   mainWindow = new BrowserWindow({
@@ -31,13 +41,7 @@ function createWindows() {
     mainWindow.webContents.openDevTools();
   }
 
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "./menu.html"),
-      protocol: "file:",
-      slashes: true,
-    }),
-  );
+  mainWindow.loadURL(getHtmlPath("menu.html"));
 
   mainWindow.on("closed", function() {
     mainWindow = null;
@@ -46,7 +50,7 @@ function createWindows() {
 
 function createTray() {
   const image = nativeImage.createFromPath(
-    path.join(__dirname, "/images/trayTemplate.png"),
+    path.join(__dirname, "../static/images/trayTemplate.png"),
   );
   tray = new Tray(image);
 }
@@ -88,13 +92,7 @@ ipcMain.on("openSettings", function() {
     settingsWindow.webContents.openDevTools();
   }
 
-  settingsWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "./settings.html"),
-      protocol: "file:",
-      slashes: true,
-    }),
-  );
+  settingsWindow.loadURL(getHtmlPath("settings.html"));
 
   settingsWindow.on("close", function() {
     app.dock.hide();

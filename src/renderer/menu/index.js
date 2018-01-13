@@ -7,6 +7,8 @@ import Coin from "./coin";
 import Stats from "./stats";
 import fetchCoinMarketCap from "./fetchCoinMarketCap";
 
+import "../styles/app.scss";
+
 const REFRESH_INTERVAL = 45000;
 
 class App extends React.Component {

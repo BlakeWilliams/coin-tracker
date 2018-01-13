@@ -4,8 +4,9 @@ import _ from "lodash";
 import { ipcRenderer } from "electron";
 
 import Coin from "./coin";
-
 import fetchCoins from "./fetchCoins";
+
+import "../styles/settings.scss";
 
 class App extends React.Component {
   constructor(props) {

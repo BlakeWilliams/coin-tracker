@@ -18,7 +18,7 @@ class Coin extends React.Component {
       <div onClick={() => this.openUrl()} className="coin-container__coin">
         <img
           className="icon"
-          src={`cryptocurrency-icons/svg/color/${symbol}.svg`}
+          src={require(`static/cryptocurrency-icons/svg/color/${symbol}.svg`)}
         />
         <p className="name">{data.name}</p>
 

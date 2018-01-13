@@ -4,9 +4,10 @@ import formatCurrency from "format-currency";
 import _ from "lodash";
 
 class Stats extends React.Component {
-  openSettings() {
+  openSettings = e => {
+    e.preventDefault();
     ipcRenderer.send("openSettings");
-  }
+  };
 
   get total() {
     const { coinData, savedCoins } = this.props;
@@ -28,7 +29,7 @@ class Stats extends React.Component {
     return (
       <div className="status">
         <span className="total">${formatCurrency(this.total)}</span>
-        <a onClick={() => this.openSettings()} href="#">
+        <a onClick={this.openSettings} href="#">
           <i className="fa fa-gear" />
         </a>
       </div>
